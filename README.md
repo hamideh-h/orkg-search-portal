@@ -7,5 +7,4 @@ A lightweight web interface for semantic search over research knowledge graphs.
 
 ### Backend
 Deployed at: https://orkg-search-portal.onrender.com  
-(You can use your own instance if you fork this repository.)
 
