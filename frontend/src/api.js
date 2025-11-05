@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://orkg-search-backend.onrender.com";
 
 export async function searchResources(q, page = 0, size = 25, classes = []) {
   const url = new URL("/api/search", API_BASE);
