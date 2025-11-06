@@ -107,7 +107,7 @@ export default function App() {
         maxWidth: 980,
         margin: "24px auto 80px",
         padding: "0 16px",
-        fontFamily: "system-ui, Arial, Segoe UI",
+        fontFamily: "system-ui, Arial, Segue UI",
       }}
     >
       <h1 style={{ marginBottom: 16 }}>ORKG Search</h1>

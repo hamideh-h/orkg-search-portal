@@ -1,3 +1,4 @@
+// javascript
 import { useEffect, useState } from "react";
 
 export default function AdvancedFilters({ onFilterResults }) {
@@ -8,49 +9,58 @@ export default function AdvancedFilters({ onFilterResults }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Fetch template properties when a valid templateId is entered
   useEffect(() => {
-    if (!templateId) {
+    const id = templateId.trim();
+    if (!id) {
       setFields([]);
       setSelectedField("");
+      setLoading(false);
       return;
     }
+
+    const controller = new AbortController();
     setLoading(true);
     setError("");
 
-    fetch(`https://www.orkg.org/api/templates/${templateId}`)
+    fetch(`https://www.orkg.org/api/templates/${id}`, { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error("Template not found");
         return r.json();
       })
       .then((data) => {
-        const props = (data.properties || []).map((p) => ({
-          label: p.path.label,
-          predicate: p.path.id,
-        }));
+        const props = (Array.isArray(data?.properties) ? data.properties : []).map((p) => ({
+          label: p?.path?.label || p?.label || "Unnamed field",
+          predicate: p?.path?.id || p?.id || "",
+        })).filter((p) => p.predicate);
         setFields(props);
       })
-      .catch((err) => setError(err.message))
+      .catch((err) => {
+        if (err.name === "AbortError") return;
+        setError(err.message || String(err));
+      })
       .finally(() => setLoading(false));
+
+    return () => controller.abort();
   }, [templateId]);
 
-  // Perform field-value search
   const handleFieldSearch = async () => {
     if (!selectedField || !fieldValue) return;
     setLoading(true);
     setError("");
 
     try {
-      const url = `https://www.orkg.org/api/statements/?predicate=${selectedField}&object__icontains=${encodeURIComponent(
-        fieldValue
-      )}`;
+      const url = `https://www.orkg.org/api/statements/?predicate=${encodeURIComponent(
+        selectedField
+      )}&object__icontains=${encodeURIComponent(fieldValue)}`;
       const res = await fetch(url);
+      if (!res.ok) throw new Error(`Search failed: ${res.status}`);
       const json = await res.json();
-
-      // Pass results back to parent
-      const ids = json.content.map((s) => s.subject.id);
+      const ids = Array.isArray(json?.content)
+        ? json.content.map((s) => s?.subject?.id).filter(Boolean)
+        : [];
       onFilterResults(ids);
     } catch (err) {
+      if (err.name === "AbortError") return;
       setError(String(err));
     } finally {
       setLoading(false);
@@ -71,7 +81,7 @@ export default function AdvancedFilters({ onFilterResults }) {
       <input
         placeholder="Template ID (e.g. R108555)…"
         value={templateId}
-        onChange={(e) => setTemplateId(e.target.value.trim())}
+        onChange={(e) => setTemplateId(e.target.value)}
         style={{
           width: "100%",
           padding: "8px 10px",
@@ -84,7 +94,7 @@ export default function AdvancedFilters({ onFilterResults }) {
       {loading && <div style={{ fontSize: 14 }}>Loading…</div>}
       {error && <div style={{ color: "crimson" }}>{error}</div>}
 
-      {fields.length > 0 && (
+      {fields.length > 0 ? (
         <>
           <div
             style={{
@@ -122,12 +132,13 @@ export default function AdvancedFilters({ onFilterResults }) {
 
             <button
               onClick={handleFieldSearch}
+              disabled={loading || !selectedField || !fieldValue}
               style={{
                 padding: "6px 10px",
                 borderRadius: 6,
                 border: "1px solid #999",
                 background: "#f4f4f4",
-                cursor: "pointer",
+                cursor: loading ? "not-allowed" : "pointer",
               }}
             >
               Filter
@@ -142,6 +153,8 @@ export default function AdvancedFilters({ onFilterResults }) {
             ))}
           </ul>
         </>
+      ) : (
+        templateId.trim() && !loading && <div style={{ fontSize: 13 }}>No fields found for this template.</div>
       )}
     </div>
   );
