@@ -1,5 +1,8 @@
+// javascript
 import { useEffect, useMemo, useState } from "react";
 import { searchResources, searchPapers } from "./api";
+import AdvancedFilters from "./AdvancedFilters";
+
 
 const ALL_TYPES = ["Paper", "Software", "Dataset", "Code"];
 
@@ -36,9 +39,11 @@ export default function App() {
   useEffect(() => {
     if (!q) {
       setData({ total: 0, page: 0, size, items: [] });
+      setLoading(false);
       return;
     }
 
+    let cancelled = false;
     setLoading(true);
     setError("");
 
@@ -51,18 +56,40 @@ export default function App() {
         : searchResources(q, page, size, types);
 
     Promise.resolve(fetchPromise)
-      .then(setData)
-      .catch((e) => setError(String(e)))
-      .finally(() => setLoading(false));
+      .then((res) => {
+        if (cancelled) return;
+        // basic validation of expected shape
+        if (res && typeof res === "object" && Array.isArray(res.items) && typeof res.total === "number") {
+          setData(res);
+        } else {
+          // fallback to a safe shape
+          setData({
+            total: Number(res?.total) || 0,
+            page: Number(res?.page) || page,
+            size: Number(res?.size) || size,
+            items: Array.isArray(res?.items) ? res.items : [],
+          });
+        }
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setError(String(e));
+      })
+      .finally(() => {
+        if (cancelled) return;
+        setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [q, page, size, types, author, yearFrom, yearTo]);
 
-  const totalPages = useMemo(
-    () =>
-      data?.total
-        ? Math.max(1, Math.ceil(data.total / (data.size || size)))
-        : 1,
-    [data.total, data.size, size]
-  );
+  const totalPages = useMemo(() => {
+    const total = data?.total ?? 0;
+    const pageSize = data?.size || size;
+    return total ? Math.max(1, Math.ceil(total / pageSize)) : 1;
+  }, [data, size]);
 
   const toggleType = (t) => {
     setPage(0);
@@ -222,6 +249,15 @@ export default function App() {
           </span>
         </div>
       )}
+
+      {/* ADVANCED FILTERS */}
+        {types.length === 1 && types[0] === "Paper" && (
+        <AdvancedFilters
+        onFilterResults={(ids) => {
+          console.log("Matched resource IDs:", ids);
+        }}
+        />
+        )}
 
       {/* Status / errors */}
       {loading && <div>Loading…</div>}
