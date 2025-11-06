@@ -22,7 +22,7 @@ export default function AdvancedFilters({ onFilterResults }) {
     setLoading(true);
     setError("");
 
-    fetch(`https://www.orkg.org/api/templates/${id}`, { signal: controller.signal })
+    fetch(`https://orkg.org/api/templates/${id}`, { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error("Template not found");
         return r.json();
@@ -49,7 +49,7 @@ export default function AdvancedFilters({ onFilterResults }) {
     setError("");
 
     try {
-      const url = `https://www.orkg.org/api/statements/?predicate=${encodeURIComponent(
+      const url = `https://orkg.org/api/statements/?predicate=${encodeURIComponent(
         selectedField
       )}&object__icontains=${encodeURIComponent(fieldValue)}`;
       const res = await fetch(url);
