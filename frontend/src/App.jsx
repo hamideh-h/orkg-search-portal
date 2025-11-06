@@ -258,6 +258,11 @@ export default function App() {
         }}
         />
         )}
+        <AdvancedFilters
+  onFilterResults={(ids) => {
+    console.log("Matched resource IDs:", ids);
+  }}
+/>
 
       {/* Status / errors */}
       {loading && <div>Loading…</div>}
