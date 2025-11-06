@@ -250,14 +250,15 @@ export default function App() {
                 </div>
             )}
 
-            {/* ADVANCED FILTERS */}
-            {types.length === 1 && types[0] === "Paper" && (
-                <AdvancedFilters
-                    onFilterResults={(ids) => {
-                        console.log("Matched resource IDs:", ids);
-                    }}
-                />
-            )}
+            <AdvancedFilters
+                onFilterResults={(ids) => {
+                    setData((prev) => ({
+                        ...prev,
+                        items: prev.items.filter((item) => ids.includes(item.id)),
+                        total: prev.items.filter((item) => ids.includes(item.id)).length,
+                    }));
+                }}
+            />
 
 
             {/* Status / errors */}
