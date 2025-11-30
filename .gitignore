@@ -1,0 +1,20 @@
+# IDE
+.idea/
+.vscode/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS trash
+.DS_Store
+Thumbs.db
+
+# Env / secrets
+.env
+.env.local
