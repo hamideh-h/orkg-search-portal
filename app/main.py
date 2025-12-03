@@ -5,8 +5,12 @@ from app.orkg_client import (
     search_resources,
     search_papers_hybrid,
 )
+from rag_api import router as rag_router
 
 app = FastAPI(title="ORKG Search API")
+app.include_router(rag_router)
+
+
 
 # Allow frontend calls
 app.add_middleware(
