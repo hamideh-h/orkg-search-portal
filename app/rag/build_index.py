@@ -121,6 +121,9 @@ def fetch_papers_with_annotations(
 
     session = requests.Session()
 
+    TEMPLATES_OF_INTEREST = {
+        "Contribution": "R603969"
+    }
     paper_headers = {
         "Accept": "application/vnd.orkg.paper.v2+json",
         "Content-Type": "application/json",
@@ -170,7 +173,8 @@ def fetch_papers_with_annotations(
 
                 all_annos = []
 
-                for tpl_label, tpl_id in TEMPLATES_OF_INTEREST.items():
+
+                for tpl_label, tpl_id in "TEMPLATES_OF_INTEREST".items():
                     inst = fetch_template_instance(session, tpl_id, cid)
                     if inst is None:
                         continue  # this template not used for this contribution
