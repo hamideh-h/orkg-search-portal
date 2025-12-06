@@ -22,7 +22,7 @@ def build_rag_index():
     Settings.node_parser = SentenceSplitter(chunk_size=512, chunk_overlap=50)
 
     # 2) Fetch the ORKG data (papers + datasets + version info)
-    papers, datasets = fetch_papers_and_datasets()
+    papers, datasets = fetch_papers_with_annotations()
 
     # 3) Convert to Documents
     docs = []
@@ -59,30 +59,74 @@ def build_rag_index():
 
 
 
-def fetch_papers_and_datasets(
+def fetch_template_instance(session, template_id: str, instance_id: str):
+    url = f"{ORKG_SANDBOX_API}/templates/{template_id}/instances/{instance_id}"
+    headers = {
+        "Accept": "application/vnd.orkg.template-instance.v1+json",
+        "Content-Type": "application/vnd.orkg.template-instance.v1+json",
+    }
+    resp = session.get(url, headers=headers, timeout=30)
+
+    if resp.status_code == 404:
+        # template not applicable to this instance
+        return None
+
+    resp.raise_for_status()
+    return resp.json()
+
+
+def extract_annotations_from_instance(instance_json: dict) -> list[dict]:
+    """Flatten template instance to (predicate_label, value, value_type, predicate_id, value_id)."""
+    preds = instance_json.get("predicates", {})
+    stmts = instance_json.get("statements", {})
+
+    annotations = []
+    for pred_id, stmt_list in stmts.items():
+        pred_info = preds.get(pred_id, {})
+        pred_label = pred_info.get("label", pred_id)
+
+        for stmt in stmt_list:
+            thing = stmt.get("thing", {})
+            t_class = thing.get("_class")
+            value_id = thing.get("id")
+            value_label = thing.get("label")
+
+            if t_class == "literal":
+                value_type = thing.get("datatype", "xsd:string")
+            elif t_class == "resource":
+                value_type = "resource"
+            elif t_class == "list":
+                value_type = "list"
+            else:
+                value_type = t_class or "unknown"
+
+            annotations.append(
+                {
+                    "predicate_id": pred_id,
+                    "predicate_label": pred_label,
+                    "value_id": value_id,
+                    "value_label": value_label,
+                    "value_type": value_type,
+                }
+            )
+
+    return annotations
+
+def fetch_papers_with_annotations(
     research_field_id: str = SOFTWARE_ARCH_RF_ID,
     page_size: int = 50,
     max_pages: int = 10,
 ):
-    """
-    Fetch papers (and later datasets) from ORKG sandbox for a given research field.
-
-    Returns:
-        papers: list[dict]
-        datasets: list[dict]  # currently empty, left as TODO
-    """
     import requests
 
     session = requests.Session()
 
-    headers = {
-        # v2 gives the modern paper representation
+    paper_headers = {
         "Accept": "application/vnd.orkg.paper.v2+json",
         "Content-Type": "application/json",
     }
 
     papers = []
-    datasets = []  # TODO: wire via /api/datasets/... once I decide how I map research problems
 
     for page in range(max_pages):
         params = {
@@ -90,30 +134,72 @@ def fetch_papers_and_datasets(
             "include_subfields": "true",
             "size": page_size,
             "page": page,
-            # created_at,desc / title,asc / etc.
             "sort": "created_at,desc",
         }
-
-        resp = session.get(f"{ORKG_SANDBOX_API}/papers", params=params, headers=headers, timeout=30)
+        resp = session.get(
+            f"{ORKG_SANDBOX_API}/papers",
+            params=params,
+            headers=paper_headers,
+            timeout=30,
+        )
         resp.raise_for_status()
         data = resp.json()
 
-        # ORKG uses a paged response with "content" and "page"
-        page_content = data.get("content", [])
-        if not page_content:
+        content = data.get("content", [])
+        if not content:
             break
 
-        for p in page_content:
-            pid = p.get("id")
+        for p in content:
+            pid = p["id"]
+
+            # fetch full paper to get contributions
+            paper_resp = session.get(
+                f"{ORKG_SANDBOX_API}/papers/{pid}",
+                headers=paper_headers,
+                timeout=30,
+            )
+            paper_resp.raise_for_status()
+            paper_full = paper_resp.json()
+
+            contributions = paper_full.get("contributions", [])
+
+            contribution_annos = []
+            for c in contributions:
+                cid = c["id"]
+                c_label = c.get("label")
+
+                all_annos = []
+
+                for tpl_label, tpl_id in TEMPLATES_OF_INTEREST.items():
+                    inst = fetch_template_instance(session, tpl_id, cid)
+                    if inst is None:
+                        continue  # this template not used for this contribution
+
+                    annos = extract_annotations_from_instance(inst)
+                    # tag them with template info + contribution
+                    for a in annos:
+                        a["template_id"] = tpl_id
+                        a["template_label"] = tpl_label
+                        a["contribution_id"] = cid
+                        a["contribution_label"] = c_label
+                    all_annos.extend(annos)
+
+                if all_annos:
+                    contribution_annos.append(
+                        {
+                            "id": cid,
+                            "label": c_label,
+                            "annotations": all_annos,
+                        }
+                    )
+
             papers.append(
                 {
                     "id": pid,
-                    "title": p.get("title"),
-                    "url": f"https://sandbox.orkg.org/paper/{pid}" if pid else None,
-                    "publication_info": p.get("publication_info"),
-                    "identifiers": p.get("identifiers"),
-                    "authors": p.get("authors"),
-                    "research_fields": p.get("research_fields"),
+                    "title": paper_full.get("title"),
+                    "authors": paper_full.get("authors"),
+                    "research_fields": paper_full.get("research_fields"),
+                    "annotations": contribution_annos,
                 }
             )
 
@@ -121,7 +207,7 @@ def fetch_papers_and_datasets(
         if page_info.get("number", 0) >= page_info.get("total_pages", 1) - 1:
             break
 
-    return papers, datasets
+    return papers
 
 
 
