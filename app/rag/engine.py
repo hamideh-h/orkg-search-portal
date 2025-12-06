@@ -5,13 +5,13 @@ from llama_index.core import VectorStoreIndex, StorageContext, Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.openai import OpenAI  # or Mistral etc.
 
-from .schemas import RAGQueryRequest, RAGResultItem, RAGQueryResponse  # your pydantic models
+from .schemas import RAGQueryRequest, RAGResultItem, RAGQueryResponse  # pydantic models
 
 INDEX_DIR = "storage/nfdixcs_index"
 
 # initialize global LlamaIndex settings
 Settings.embed_model = HuggingFaceEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
-Settings.llm = OpenAI(model="gpt-4.1-mini")  # or whatever you actually use
+Settings.llm = OpenAI(model="gpt-4.1-mini")  # or whatever
 
 
 def _load_index() -> VectorStoreIndex:
@@ -82,7 +82,7 @@ def run_rag_query(payload: RAGQueryRequest) -> RAGQueryResponse:
         "top_k": str(payload.top_k),
         "llm_model": getattr(Settings.llm, "model", None),
         "vector_index": "nfdixcs_index_v1",
-        "retrieval_time_ms": None,  # fill with actual timing later if you care
+        "retrieval_time_ms": None,  # fill with actual timing later
     }
 
     return RAGQueryResponse(
