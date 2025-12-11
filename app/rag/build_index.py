@@ -40,30 +40,32 @@ def build_rag_index() -> None:
     """
     Build and persist a retrieval-augmented generation (RAG) index using
     ORKG metadata + contribution-level annotations only.
-
-    Workflow:
-      1. Fetch papers with contribution annotations from ORKG.
-      2. Normalize annotation properties into semantic fields.
-      3. Use an LLM to generate a 3–6 sentence summary paragraph for each
-         (paper, contribution) based ONLY on metadata and annotations.
-      4. Print each generated paragraph (debugging / verification).
-      5. Embed the paragraphs and build a vector index.
     """
 
-    # -------- 1. Configure LlamaIndex Settings --------
+    # 1) Configure LlamaIndex
     Settings.embed_model = HuggingFaceEmbedding(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
     Settings.node_parser = SentenceSplitter(chunk_size=512, chunk_overlap=50)
 
-    # -------- 2. Fetch ORKG data --------
-    papers, datasets = fetch_papers_with_annotations()
+    # 2) Fetch ORKG data
+    papers, datasets = fetch_papers_with_annotations(max_papers=2)
+    print("Fetched papers:", len(papers))
 
-    # -------- 3. Build vector docs from LLM summaries --------
-    logger.info("Generating LLM summaries for RAG index...")
+    # for debugging: only use the first paper
+    papers = papers[:1]
+
     docs: List[str] = []
 
     for paper in papers:
+        annotations = paper.get("annotations", []) or []
+        print(
+            "Paper:",
+            paper.get("title"),
+            "Contributions with annotations:",
+            len(annotations),
+        )
+
         paper_meta = {
             "title": paper.get("title"),
             "authors": paper.get("authors"),
@@ -71,20 +73,22 @@ def build_rag_index() -> None:
             "year": paper.get("year", None),
         }
 
-        for contrib in paper.get("annotations", []) or []:
+        for contrib in annotations:
+            raw_annos = contrib.get("annotations", []) or []
+            print("RAW ANNOS:", raw_annos)
 
-            # Normalize ORKG annotations into semantic fields
-            semantic = normalize_annotations(contrib.get("annotations", []) or [])
+            semantic = normalize_annotations(raw_annos)
+            print("SEMANTIC:", semantic)
+
             if not semantic:
+                # nothing to summarize for this contribution
                 continue
 
-            # Create the paragraph with LLM
             summary = summarize_contribution_with_llm(
                 paper_meta=paper_meta,
-                semantic=semantic
+                semantic=semantic,
             )
 
-            # -------- PRINTING PARAGRAPH --------
             print("\n==============================")
             print(f"Paper: {paper_meta['title']}")
             print(f"Contribution: {contrib.get('label')}")
@@ -92,14 +96,15 @@ def build_rag_index() -> None:
             print(summary)
             print("==============================\n")
 
-            # Add to docs for indexing
             docs.append(summary)
 
-    # -------- 4. Build vector index --------
+    if not docs:
+        logger.warning("No documents built (no annotated contributions). Nothing to index.")
+        return
+
     logger.info("Building vector index with %d documents...", len(docs))
     index = VectorStoreIndex.from_documents(docs)
 
-    # -------- 5. Persist to disk --------
     try:
         index.storage_context.persist(persist_dir=INDEX_DIR)
     except AttributeError:
@@ -178,6 +183,7 @@ def fetch_papers_with_annotations(
     research_field_id: str = SOFTWARE_ARCH_RF_ID,
     page_size: int = 50,
     max_pages: int = 10,
+    max_papers: int = None,
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     """
     Fetch papers from the ORKG sandbox for a research field and extract
@@ -290,7 +296,8 @@ def fetch_papers_with_annotations(
         page_info = data.get("page", {}) or {}
         if page_info.get("number", 0) >= page_info.get("total_pages", 1) - 1:
             break
-
+        if max_papers and len(papers) >= max_papers:
+            return papers, datasets
     return papers, datasets
 
 PROPERTY_MAP = {
@@ -361,7 +368,7 @@ def normalize_annotations(annos):
 from typing import Dict, Any
 from openai import OpenAI
 
-client = OpenAI()
+client = OpenAI("put ypur key")
 
 def summarize_contribution_with_llm(
     paper_meta: Dict[str, Any],
@@ -374,6 +381,7 @@ def summarize_contribution_with_llm(
     No full text involved.
     """
     # keep JSON small and clean for the prompt
+
     minimal_paper_meta = {
         "title": paper_meta.get("title"),
         "year": paper_meta.get("year"),
