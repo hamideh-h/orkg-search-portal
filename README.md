@@ -1,3 +1,10 @@
+### Status: Work in Progress (Active Development)
+
+This repository is under active development and not yet production-ready. 
+The core architecture and main functionality are implemented; stability,
+evaluation, and documentation are still evolving.
+
+
 # ORKG Search Portal
 
 A lightweight web interface for semantic search over research knowledge graphs.
