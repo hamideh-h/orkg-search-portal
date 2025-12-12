@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Query, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
-from app.schemas import SearchResponse, ResourceItem
-from app.orkg_client import (
+from app.rag.schemas.schemas import SearchResponse, ResourceItem
+from app.rag.orkg.client import (
     search_resources,
     search_papers_hybrid,
 )
-from app.rag.rag_api import router as rag_router
+from app.rag.api.rag_api import router as rag_router
 
 app = FastAPI(title="ORKG Search API")
 app.include_router(rag_router)
