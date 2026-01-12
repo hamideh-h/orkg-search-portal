@@ -22,7 +22,7 @@ def _docs_to_llama_documents(docs: List[Dict[str, Any]]) -> List[Document]:
 def build_llama_index_for_paper(paper_id: str) -> int:
     settings.ensure_dirs()
 
-    # ✅ create embed model instance explicitly
+    #  create embed model instance explicitly
     embed_model = HuggingFaceEmbedding(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )

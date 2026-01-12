@@ -15,6 +15,9 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from app.rag.core.settings import settings
 from app.rag.schemas.schemas import RAGQueryRequest, RAGResultItem, RAGQueryResponse  # adjust if your path differs
 
+_index = None
+_index_lock = Lock()
+
 LlamaSettings.llm = None  # retrieval-only mode
 # -------------------------
 # LlamaIndex global config (lazy init)
@@ -22,9 +25,6 @@ LlamaSettings.llm = None  # retrieval-only mode
 
 _llama_inited = False
 _llama_init_lock = Lock()
-
-_index = None
-_index_lock = Lock()
 
 def _init_llama_once() -> None:
     global _llama_inited
@@ -60,6 +60,7 @@ def _load_index() -> VectorStoreIndex:
 
 def get_index() -> VectorStoreIndex:
     global _index
+    global _index_lock
     if _index is not None:
         return _index
 
