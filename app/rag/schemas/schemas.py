@@ -15,7 +15,7 @@ class RAGFilters(BaseModel):
     research_field: Optional[List[str]] = None
     author: Optional[List[str]] = None
 
-    # Contribution-level (if you want them later)
+    # Contribution-level filters
     contribution_id: Optional[List[str]] = None
     contribution_label: Optional[List[str]] = None
     level: Optional[List[str]] = None  # e.g. ["paper", "contribution"]
@@ -40,7 +40,7 @@ class RAGResultItem(BaseModel):
     score: float = 0.0
     snippet: str = ""
 
-    # Keep these optional to stay compatible with your earlier schema fields
+    # keep old fields for compatibility
     contribution_type: Optional[str] = None
     task: Optional[Any] = None
     dataset: Optional[Any] = None

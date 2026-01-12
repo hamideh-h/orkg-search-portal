@@ -45,7 +45,7 @@ def build_llama_index_for_paper(paper_id: str) -> int:
     docs = bundle_to_docs(bundle)
     llama_docs = _docs_to_llama_documents(docs)
 
-    # ✅ pass embed_model explicitly so it cannot fall back to OpenAI
+    # it passes embed_model explicitly so it cannot fall back to OpenAI
     index = VectorStoreIndex.from_documents(
         llama_docs, embed_model=embed_model
     )

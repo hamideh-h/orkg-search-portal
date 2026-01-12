@@ -67,7 +67,7 @@ class Settings:
     WRITE_JSONL_DOCS: bool = _env_bool("WRITE_JSONL_DOCS", True)
 
     # ---- runtime ----
-    # If you later add LLM keys, keep them optional and loaded from env
+    # OpenAI API key (for LLM usage)
     OPENAI_API_KEY: str | None = os.getenv("OPENAI_API_KEY") or None
 
     def ensure_dirs(self) -> None:
@@ -78,5 +78,5 @@ class Settings:
         self.CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# A single shared instance you can import everywhere
+# A single shared instance that can import everywhere
 settings = Settings()
