@@ -68,7 +68,7 @@ class OrkgClient:
         raise last_err  # type: ignore[misc]
 
     # -------------------------
-    # endpoints you actually need
+    # endpoints
     # -------------------------
     def get_paper(self, paper_id: str) -> dict:
         if paper_id in self._paper_cache:
@@ -114,7 +114,7 @@ class OrkgClient:
         return out
 
     # -------------------------
-    # optional search helpers (nice-to-have)
+    # optional search helpers
     # -------------------------
     def search_resources(self, q: str, *, page: int = 0, size: int = 25, classes: str | None = None) -> dict:
         params: Dict[str, Any] = {"q": q, "page": page, "size": size}
