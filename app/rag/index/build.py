@@ -1,5 +1,8 @@
-# app/rag/index/build.py
-from pathlib import Path
+"""Index build helpers.
+
+Small wrappers that run the extract -> docs -> persist pipeline for one or many papers.
+"""
+
 from typing import List
 
 from app.rag.core.settings import settings

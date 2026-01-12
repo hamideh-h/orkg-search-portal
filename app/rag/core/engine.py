@@ -1,4 +1,8 @@
-# app/rag/core/engine.py
+"""RAG engine helpers and entrypoint.
+
+Provides a single function `run_rag_query` used by the API. Handles lazy
+initialization of LlamaIndex-related settings and the persisted index.
+"""
 
 from __future__ import annotations
 
@@ -18,6 +22,9 @@ LlamaSettings.llm = None  # retrieval-only mode
 
 _llama_inited = False
 _llama_init_lock = Lock()
+
+_index = None
+_index_lock = Lock()
 
 def _init_llama_once() -> None:
     global _llama_inited
@@ -42,7 +49,13 @@ def _load_index() -> VectorStoreIndex:
     settings.ensure_dirs()
     persist_dir = str(settings.INDEX_DIR)  # absolute, stable
     storage_context = StorageContext.from_defaults(persist_dir=persist_dir)
-    return VectorStoreIndex.from_storage(storage_context)
+    # Use getattr to avoid static-analysis errors if the installed llama_index
+    # version exposes a different API. If the method is unavailable, raise a
+    # helpful error at runtime.
+    loader = getattr(VectorStoreIndex, "from_storage", None)
+    if callable(loader):
+        return loader(storage_context)
+    raise RuntimeError("VectorStoreIndex.from_storage is unavailable in the installed llama_index package. Please install a compatible version.")
 
 
 def get_index() -> VectorStoreIndex:

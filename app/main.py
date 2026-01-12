@@ -1,3 +1,10 @@
+"""API entrypoint for the ORKG Search service.
+
+This module defines the FastAPI app, includes the RAG router, and exposes
+simple endpoints used by the frontend: health check and a unified /api/search
+route that delegates to resource- or paper-focused search helpers.
+"""
+
 from fastapi import FastAPI, Query, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from app.rag.schemas.schemas import SearchResponse, ResourceItem

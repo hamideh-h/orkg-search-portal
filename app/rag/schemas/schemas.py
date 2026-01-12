@@ -59,3 +59,25 @@ class RAGQueryResponse(BaseModel):
 
     used_filters: Dict[str, List[Any]] = Field(default_factory=dict)
     meta: Dict[str, Any] = Field(default_factory=dict)
+
+
+# -- Compatibility: models expected by the lightweight search API (app/main.py)
+class ResourceItem(BaseModel):
+    """Lightweight resource item used by the simple search endpoint.
+
+    Keep fields permissive — the frontend only needs a few attributes.
+    """
+    id: str
+    title: Optional[str] = None
+    year: Optional[int] = None
+    doi: Optional[str] = None
+    url: Optional[str] = None
+    score: Optional[float] = None
+
+
+class SearchResponse(BaseModel):
+    total: int = 0
+    page: int = 0
+    size: int = 0
+    items: List[ResourceItem] = Field(default_factory=list)
+
