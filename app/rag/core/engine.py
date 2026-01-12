@@ -71,10 +71,10 @@ def _md_first(md: dict, *keys: str, default=None):
 
 
 def _orkg_url(paper_id: Optional[str], contribution_id: Optional[str] = None) -> Optional[str]:
-    # Choose what you want to link to:
-    # - paper: https://orkg.org/paper/<id> (if you use that in UI)
+    # Choose what we want to link to:
+    # - paper: https://orkg.org/paper/<id>
     # - resource: https://orkg.org/resource/<id>
-    # ORKG often uses /paper/<id> and /resource/<id>. Pick one consistently.
+    # ORKG often uses /paper/<id> and /resource/<id>. Here we prefer contribution/resource if available.
     if contribution_id:
         return f"https://orkg.org/resource/{contribution_id}"
     if paper_id:
@@ -123,8 +123,8 @@ def run_rag_query(payload: RAGQueryRequest) -> RAGQueryResponse:
                 score=score,
                 snippet=node.get_content(),
 
-                # If your schema still expects these old fields, keep them,
-                # but fill what you actually have.
+                # If the schema still expects these old fields,
+                #
                 contribution_type=contribution_label,
                 task=md.get("task"),
                 dataset=md.get("dataset"),
