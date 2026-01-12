@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 
-from app.rag.core.settings import Settings
+from app.rag.core.settings import Settings, settings
 
 
 @dataclass
@@ -143,7 +143,6 @@ class OrkgClient:
 
 # Convenience module-level helpers used by the lightweight API (app/main.py)
 import asyncio
-from typing import Any
 
 
 async def search_resources(q: str, *, page: int = 0, size: int = 25, classes: str | None = None) -> dict:
