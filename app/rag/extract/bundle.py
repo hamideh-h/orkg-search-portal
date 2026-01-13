@@ -1,6 +1,6 @@
 # app/rag/extract/bundle.py
 from collections import defaultdict
-from typing import Any, Dict
+from typing import Any, Dict, Optional, List
 
 from app.rag.extract.crawl import crawl_neighborhood
 from app.rag.extract.classify import classify_statement
@@ -101,3 +101,114 @@ def extract_contribution_bundle(
         "compact": compact,
         "buckets": dict(buckets),
     }
+
+
+# -------------------------
+# Template-agnostic paper-level extraction
+# -------------------------
+
+
+def merge_paper_core_from_contributions(contribs: List[dict]) -> dict:
+    """
+    Merge contribution-level `compact` results into a single paper-level core dict.
+
+    - Keeps insertion order and avoids duplicates.
+    - Applies a simple leakage guard: anything appearing in evaluation is removed from methods.
+    """
+    merged = {"problems": [], "methods": [], "data": [], "evaluation": [], "artifacts": []}
+
+    def add_unique(key: str, vals: list[str]):
+        seen = set(merged[key])
+        for v in vals:
+            if v not in seen:
+                merged[key].append(v)
+                seen.add(v)
+
+    for c in contribs:
+        comp = c.get("compact", {})
+        for k in merged.keys():
+            add_unique(k, comp.get(k, []))
+
+    # leakage guard at paper level too
+    ev2 = set(merged["evaluation"])
+    merged["methods"] = [m for m in merged["methods"] if m not in ev2]
+
+    return merged
+
+
+def extract_template_agnostic_paper_bundle(
+    client: OrkgClient,
+    paper_id: str,
+    *,
+    depth: int = 4,
+    rules: Optional[ExtractionRules] = None,
+) -> Dict[str, Any]:
+    """
+    Extract a template-agnostic representation of a paper using contribution-level
+    crawling and classification.
+
+    This function mirrors the older script-based implementation but uses the
+    shared `OrkgClient`, settings and the existing contribution extractor.
+
+    Returns a dict containing paper metadata, per-contribution compact facts and
+    a merged `paper_core` composed from contributions.
+    """
+    rules = rules or ExtractionRules()
+    paper = client.get_paper(paper_id)
+
+    # --- core paper metadata (unchanged) ---
+    authors = []
+    for a in (paper.get("authors") or []):
+        if isinstance(a, dict):
+            authors.append(a.get("name") or a.get("label") or a.get("id"))
+        else:
+            authors.append(str(a))
+
+    bundle: Dict[str, Any] = {
+        "paper": {
+            "id": paper.get("id"),
+            "title": paper.get("title"),
+            "year": paper.get("year"),
+            "doi": paper.get("doi"),
+            "url": paper.get("url"),
+            "authors": [x for x in authors if x],
+            "research_fields": [rf.get("label") for rf in (paper.get("research_fields") or []) if isinstance(rf, dict)],
+        },
+        "paper_core": {  # filled after extracting contributions
+            "problems": [],
+            "methods": [],
+            "data": [],
+            "evaluation": [],
+            "artifacts": [],
+        },
+        "contributions": [],
+        "extraction": {
+            "depth": depth,
+            "template_agnostic": True,
+            "notes": [
+                "No predicate IDs are used.",
+                "Paper core is derived by merging contribution-level facts (more reliable than paper node crawl).",
+                "Leaf extraction follows resource edges and collects Name literals.",
+            ],
+        },
+    }
+
+    # --- extract contributions first ---
+    for c in (paper.get("contributions") or []):
+        cid = c.get("id")
+        clabel = c.get("label") or ""
+        if not cid:
+            continue
+
+        contrib = extract_contribution_bundle(client, cid, clabel, rules=rules)
+
+        # leakage guard: if something appears in evaluation, it must not be a method
+        ev = set(contrib["compact"].get("evaluation", []))
+        contrib["compact"]["methods"] = [m for m in contrib["compact"].get("methods", []) if m not in ev]
+
+        bundle["contributions"].append(contrib)
+
+    # --- merge paper_core from contribution compacts ---
+    bundle["paper_core"] = merge_paper_core_from_contributions(bundle["contributions"])
+
+    return bundle
