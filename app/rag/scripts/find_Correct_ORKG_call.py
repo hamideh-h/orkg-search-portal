@@ -1,24 +1,24 @@
-import json
-import sys
-from app.rag.orkg.client import OrkgClient
-from app.rag.core.settings import settings
-from app.rag.extract.runner import extract_paper_and_paragraph
+"""Deprecated compatibility stub.
 
+The original `find_Correct_ORKG_call.py` script was replaced by
+`extract_paper_summary.py` to provide a clearer, documented, and
+maintainable extraction entrypoint.
+
+This module now intentionally refuses to run and prints a short message
+explaining the new location. Keeping a stub here avoids surprising
+`FileNotFound` errors from IDE run configurations while guiding users to
+the updated script.
+"""
+
+import sys
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        paper_id = sys.argv[1]
-    else:
-        paper_id = "R874684"
+    print("find_Correct_ORKG_call.py has been removed.")
+    print("Please use app/rag/scripts/extract_paper_summary.py instead.")
+    print("Example: python -m app.rag.scripts.extract_paper_summary R874684")
+    sys.exit(1)
 
-    client = OrkgClient(settings)
-    bundle, paragraph = extract_paper_and_paragraph(client, paper_id)
-
-    out_path = f"orkg_template_agnostic_{paper_id}.json"
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(bundle, f, indent=2, ensure_ascii=False)
-
-    print("Wrote:", out_path)
-    print("Contributions:", len(bundle.get("contributions", [])))
-    print("\nSummary paragraph:")
-    print(paragraph)
+# Prevent accidental imports from providing functionality.
+raise RuntimeError(
+    "find_Correct_ORKG_call.py has been removed. Use app.rag.scripts.extract_paper_summary instead."
+)
