@@ -77,3 +77,8 @@ If you want the script to always use a specific id from code, call it like:
 
     from app.rag.scripts.extract_paper_summary import main
     main(["R874684"])
+
+Example Answer: 
+Generated paragraph:
+Paper titled 'A Blockchain-Based Micro Economy Platform for Distributed Infrastructure Initiatives'. proposes methods: Reference Architecture. evaluated by: Case Study, Construct Validity, External Validity, Performance efficiency, Security. artifacts: Input data was used but is not available, Tool was used but is not available.
+
