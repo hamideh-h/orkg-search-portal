@@ -1,0 +1,1321 @@
+{
+  "paper": {
+    "id": "R874643",
+    "title": "Workload-Based Clustering of Coherent Feature Sets in Microservice Architectures",
+    "year": null,
+    "doi": null,
+    "url": null
+  },
+  "contributions": [
+    {
+      "id": "R874645",
+      "label": "Classifications_1",
+      "compact": {
+        "problems": [],
+        "methods": [
+          "Architecture Optimization Method"
+        ],
+        "data": [],
+        "evaluation": [
+          "Case Study",
+          "Effectiveness",
+          "Efficiency",
+          "Quality in Use"
+        ],
+        "artifacts": [
+          "Input data was used but is not available",
+          "Tool is available"
+        ]
+      },
+      "buckets": {
+        "artifact": [
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Provides Replication Package",
+            "predicate_id": "P162020",
+            "object": {
+              "id": "L1533043",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Uses Input Data",
+            "predicate_id": "P169004",
+            "object": {
+              "id": "L1533045",
+              "label": "Input data was used but is not available",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Uses Tool Support",
+            "predicate_id": "P168009",
+            "object": {
+              "id": "L1533047",
+              "label": "Tool is available",
+              "class": "literal"
+            }
+          }
+        ],
+        "evaluation": [
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Has Evaluation Guideline",
+            "predicate_id": "P168003",
+            "object": {
+              "id": "L1533044",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Evaluation method",
+            "predicate_id": "P59089",
+            "object": {
+              "id": "L1533046",
+              "label": "Case Study",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "threat to validity",
+            "predicate_id": "P39099",
+            "object": {
+              "id": "L1533048",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Evaluation Sub-Property",
+            "predicate_id": "P168002",
+            "object": {
+              "id": "L1533051",
+              "label": "Effectiveness",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Evaluation Sub-Property",
+            "predicate_id": "P168002",
+            "object": {
+              "id": "L1533052",
+              "label": "Efficiency",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Evaluation Property",
+            "predicate_id": "P168001",
+            "object": {
+              "id": "L1533053",
+              "label": "Quality in Use",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Referenced Threats to Validity Guideline",
+            "predicate_id": "P162071",
+            "object": {
+              "id": "L1533054",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ],
+        "other": [
+          {
+            "subject_id": "R874645",
+            "predicate_label": "research level",
+            "predicate_id": "P162008",
+            "object": {
+              "id": "L1533049",
+              "label": "Primary Research",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874645",
+            "predicate_label": "paper class",
+            "predicate_id": "P154073",
+            "object": {
+              "id": "L1533055",
+              "label": "Evaluation Research",
+              "class": "literal"
+            }
+          }
+        ],
+        "method": [
+          {
+            "subject_id": "R874645",
+            "predicate_label": "Research Object",
+            "predicate_id": "P123038",
+            "object": {
+              "id": "L1533050",
+              "label": "Architecture Optimization Method",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874646",
+      "label": "Classifications_2",
+      "compact": {
+        "problems": [],
+        "methods": [
+          "Architecture Optimization Method"
+        ],
+        "data": [],
+        "evaluation": [
+          "Quality in Use",
+          "Effectiveness",
+          "Efficiency",
+          "Case Study"
+        ],
+        "artifacts": []
+      },
+      "buckets": {
+        "other": [
+          {
+            "subject_id": "R874646",
+            "predicate_label": "Validity",
+            "predicate_id": "P162017",
+            "object": {
+              "id": "R874647",
+              "label": "Validity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874646",
+            "predicate_label": "research level",
+            "predicate_id": "P162008",
+            "object": {
+              "id": "R874649",
+              "label": "Research Level",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874646",
+            "predicate_label": "paper class",
+            "predicate_id": "P154073",
+            "object": {
+              "id": "R874659",
+              "label": "Paper Class",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874646",
+            "predicate_label": "Evidence",
+            "predicate_id": "P5004",
+            "object": {
+              "id": "R874660",
+              "label": "Evidence",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874649",
+            "predicate_label": "secondary research",
+            "predicate_id": "P57021",
+            "object": {
+              "id": "L1533062",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874649",
+            "predicate_label": "Primary Research",
+            "predicate_id": "P162009",
+            "object": {
+              "id": "L1533063",
+              "label": "True",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874650",
+            "predicate_label": "evaluation",
+            "predicate_id": "P34",
+            "object": {
+              "id": "R874651",
+              "label": "Evaluation",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874659",
+            "predicate_label": "validation research",
+            "predicate_id": "P154079",
+            "object": {
+              "id": "L1533070",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874659",
+            "predicate_label": "personal experience paper",
+            "predicate_id": "P154078",
+            "object": {
+              "id": "L1533071",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874659",
+            "predicate_label": "proposal of solution",
+            "predicate_id": "P154077",
+            "object": {
+              "id": "L1533072",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874659",
+            "predicate_label": "opinion paper",
+            "predicate_id": "P154076",
+            "object": {
+              "id": "L1533073",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874659",
+            "predicate_label": "philosophical paper",
+            "predicate_id": "P154075",
+            "object": {
+              "id": "L1533074",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874659",
+            "predicate_label": "evaluation research",
+            "predicate_id": "P154074",
+            "object": {
+              "id": "L1533075",
+              "label": "True",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874648",
+            "predicate_label": "construct validity",
+            "predicate_id": "P55037",
+            "object": {
+              "id": "L1533056",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874648",
+            "predicate_label": "repeatability",
+            "predicate_id": "P97002",
+            "object": {
+              "id": "L1533057",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874648",
+            "predicate_label": "internal validity",
+            "predicate_id": "P55035",
+            "object": {
+              "id": "L1533058",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874648",
+            "predicate_label": "external validity",
+            "predicate_id": "P55034",
+            "object": {
+              "id": "L1533059",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874648",
+            "predicate_label": "confirmability",
+            "predicate_id": "P162070",
+            "object": {
+              "id": "L1533060",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874661",
+            "predicate_label": "None",
+            "predicate_id": "P169001",
+            "object": {
+              "id": "L1533079",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874662",
+            "predicate_label": "None",
+            "predicate_id": "P169001",
+            "object": {
+              "id": "L1533082",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874654",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533068",
+              "label": "Quality in Use",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874655",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533066",
+              "label": "Effectiveness",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874656",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533067",
+              "label": "Efficiency",
+              "class": "literal"
+            }
+          }
+        ],
+        "method": [
+          {
+            "subject_id": "R874646",
+            "predicate_label": "Research Object",
+            "predicate_id": "P123038",
+            "object": {
+              "id": "R874650",
+              "label": "Research Object",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874650",
+            "predicate_label": "Object",
+            "predicate_id": "P47032",
+            "object": {
+              "id": "R874657",
+              "label": "Research Object List",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874651",
+            "predicate_label": "Evaluation method",
+            "predicate_id": "P59089",
+            "object": {
+              "id": "R874652",
+              "label": "Evaluation Method List",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874657",
+            "predicate_label": "Entity",
+            "predicate_id": "P45132",
+            "object": {
+              "id": "R874658",
+              "label": "Research Object Entity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874652",
+            "predicate_label": "Entity",
+            "predicate_id": "P45132",
+            "object": {
+              "id": "R874653",
+              "label": "Evaluation Method Entity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874658",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533069",
+              "label": "Architecture Optimization Method",
+              "class": "literal"
+            }
+          }
+        ],
+        "evaluation": [
+          {
+            "subject_id": "R874647",
+            "predicate_label": "Threats To Validity",
+            "predicate_id": "P123037",
+            "object": {
+              "id": "R874648",
+              "label": "Threat to Validity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874647",
+            "predicate_label": "Referenced Threats to Validity Guideline",
+            "predicate_id": "P162071",
+            "object": {
+              "id": "L1533061",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874651",
+            "predicate_label": "Has Guideline",
+            "predicate_id": "P162023",
+            "object": {
+              "id": "L1533065",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874651",
+            "predicate_label": "properties",
+            "predicate_id": "P41769",
+            "object": {
+              "id": "R874654",
+              "label": "Property",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874654",
+            "predicate_label": "Sub-Property",
+            "predicate_id": "P162024",
+            "object": {
+              "id": "R874655",
+              "label": "Property",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874654",
+            "predicate_label": "Sub-Property",
+            "predicate_id": "P162024",
+            "object": {
+              "id": "R874656",
+              "label": "Property",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874653",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533064",
+              "label": "Case Study",
+              "class": "literal"
+            }
+          }
+        ],
+        "artifact": [
+          {
+            "subject_id": "R874660",
+            "predicate_label": "Provides Replication Package",
+            "predicate_id": "P162020",
+            "object": {
+              "id": "L1533076",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874660",
+            "predicate_label": "Uses Tool Support",
+            "predicate_id": "P168009",
+            "object": {
+              "id": "R874662",
+              "label": "Tool Support",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874661",
+            "predicate_label": "available",
+            "predicate_id": "P4033",
+            "object": {
+              "id": "L1533077",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874661",
+            "predicate_label": "used",
+            "predicate_id": "P20046",
+            "object": {
+              "id": "L1533078",
+              "label": "True",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874662",
+            "predicate_label": "available",
+            "predicate_id": "P4033",
+            "object": {
+              "id": "L1533080",
+              "label": "True",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874662",
+            "predicate_label": "used",
+            "predicate_id": "P20046",
+            "object": {
+              "id": "L1533081",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ],
+        "data": [
+          {
+            "subject_id": "R874660",
+            "predicate_label": "Uses Input Data",
+            "predicate_id": "P169004",
+            "object": {
+              "id": "R874661",
+              "label": "Input Data",
+              "class": "resource"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874663",
+      "label": "Paper Class 2",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "other": [
+          {
+            "subject_id": "R874663",
+            "predicate_label": "validation research",
+            "predicate_id": "P154079",
+            "object": {
+              "id": "L1533083",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874663",
+            "predicate_label": "personal experience paper",
+            "predicate_id": "P154078",
+            "object": {
+              "id": "L1533084",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874663",
+            "predicate_label": "proposal of solution",
+            "predicate_id": "P154077",
+            "object": {
+              "id": "L1533085",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874663",
+            "predicate_label": "opinion paper",
+            "predicate_id": "P154076",
+            "object": {
+              "id": "L1533086",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874663",
+            "predicate_label": "philosophical paper",
+            "predicate_id": "P154075",
+            "object": {
+              "id": "L1533087",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874663",
+            "predicate_label": "evaluation research",
+            "predicate_id": "P154074",
+            "object": {
+              "id": "L1533088",
+              "label": "True",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874664",
+      "label": "Research Level 2",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "other": [
+          {
+            "subject_id": "R874664",
+            "predicate_label": "secondary research",
+            "predicate_id": "P57021",
+            "object": {
+              "id": "L1533089",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874664",
+            "predicate_label": "Primary Research",
+            "predicate_id": "P162009",
+            "object": {
+              "id": "L1533090",
+              "label": "True",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874665",
+      "label": "First Research Object 2",
+      "compact": {
+        "problems": [],
+        "methods": [
+          "Architecture Optimization Method"
+        ],
+        "data": [],
+        "evaluation": [
+          "Quality in Use",
+          "Effectiveness",
+          "Efficiency",
+          "Case Study"
+        ],
+        "artifacts": []
+      },
+      "buckets": {
+        "other": [
+          {
+            "subject_id": "R874665",
+            "predicate_label": "evaluation",
+            "predicate_id": "P34",
+            "object": {
+              "id": "R874666",
+              "label": "Evaluation",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874669",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533095",
+              "label": "Quality in Use",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874670",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533093",
+              "label": "Effectiveness",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874671",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533094",
+              "label": "Efficiency",
+              "class": "literal"
+            }
+          }
+        ],
+        "method": [
+          {
+            "subject_id": "R874665",
+            "predicate_label": "Object",
+            "predicate_id": "P47032",
+            "object": {
+              "id": "R874672",
+              "label": "Research Object List",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874666",
+            "predicate_label": "Evaluation method",
+            "predicate_id": "P59089",
+            "object": {
+              "id": "R874667",
+              "label": "Evaluation Method List",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874672",
+            "predicate_label": "Entity",
+            "predicate_id": "P45132",
+            "object": {
+              "id": "R874673",
+              "label": "Research Object Entity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874667",
+            "predicate_label": "Entity",
+            "predicate_id": "P45132",
+            "object": {
+              "id": "R874668",
+              "label": "Evaluation Method Entity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874673",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533096",
+              "label": "Architecture Optimization Method",
+              "class": "literal"
+            }
+          }
+        ],
+        "evaluation": [
+          {
+            "subject_id": "R874666",
+            "predicate_label": "Has Guideline",
+            "predicate_id": "P162023",
+            "object": {
+              "id": "L1533092",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874666",
+            "predicate_label": "properties",
+            "predicate_id": "P41769",
+            "object": {
+              "id": "R874669",
+              "label": "Property",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874669",
+            "predicate_label": "Sub-Property",
+            "predicate_id": "P162024",
+            "object": {
+              "id": "R874670",
+              "label": "Property",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874669",
+            "predicate_label": "Sub-Property",
+            "predicate_id": "P162024",
+            "object": {
+              "id": "R874671",
+              "label": "Property",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874668",
+            "predicate_label": "Name",
+            "predicate_id": "P15191",
+            "object": {
+              "id": "L1533091",
+              "label": "Case Study",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874674",
+      "label": "Evidence 2",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "artifact": [
+          {
+            "subject_id": "R874674",
+            "predicate_label": "Provides Replication Package",
+            "predicate_id": "P162020",
+            "object": {
+              "id": "L1533097",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874674",
+            "predicate_label": "Uses Tool Support",
+            "predicate_id": "P168009",
+            "object": {
+              "id": "R874676",
+              "label": "Tool Support",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874675",
+            "predicate_label": "available",
+            "predicate_id": "P4033",
+            "object": {
+              "id": "L1533098",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874675",
+            "predicate_label": "used",
+            "predicate_id": "P20046",
+            "object": {
+              "id": "L1533099",
+              "label": "True",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874676",
+            "predicate_label": "available",
+            "predicate_id": "P4033",
+            "object": {
+              "id": "L1533101",
+              "label": "True",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874676",
+            "predicate_label": "used",
+            "predicate_id": "P20046",
+            "object": {
+              "id": "L1533102",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ],
+        "data": [
+          {
+            "subject_id": "R874674",
+            "predicate_label": "Uses Input Data",
+            "predicate_id": "P169004",
+            "object": {
+              "id": "R874675",
+              "label": "Input Data",
+              "class": "resource"
+            }
+          }
+        ],
+        "evaluation": [
+          {
+            "subject_id": "R874675",
+            "predicate_label": "None",
+            "predicate_id": "P169001",
+            "object": {
+              "id": "L1533100",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874676",
+            "predicate_label": "None",
+            "predicate_id": "P169001",
+            "object": {
+              "id": "L1533103",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874677",
+      "label": "Validity 2",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "evaluation": [
+          {
+            "subject_id": "R874677",
+            "predicate_label": "Threats To Validity",
+            "predicate_id": "P123037",
+            "object": {
+              "id": "R874678",
+              "label": "Threat to Validity",
+              "class": "resource"
+            }
+          },
+          {
+            "subject_id": "R874677",
+            "predicate_label": "Referenced Threats to Validity Guideline",
+            "predicate_id": "P162071",
+            "object": {
+              "id": "L1533109",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ],
+        "other": [
+          {
+            "subject_id": "R874678",
+            "predicate_label": "construct validity",
+            "predicate_id": "P55037",
+            "object": {
+              "id": "L1533104",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874678",
+            "predicate_label": "repeatability",
+            "predicate_id": "P97002",
+            "object": {
+              "id": "L1533105",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874678",
+            "predicate_label": "internal validity",
+            "predicate_id": "P55035",
+            "object": {
+              "id": "L1533106",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874678",
+            "predicate_label": "external validity",
+            "predicate_id": "P55034",
+            "object": {
+              "id": "L1533107",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874678",
+            "predicate_label": "confirmability",
+            "predicate_id": "P162070",
+            "object": {
+              "id": "L1533108",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874679",
+      "label": "Paper Class 1",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "other": [
+          {
+            "subject_id": "R874679",
+            "predicate_label": "paper class",
+            "predicate_id": "P154073",
+            "object": {
+              "id": "L1533110",
+              "label": "Evaluation Research",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874680",
+      "label": "Research Level 1",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "other": [
+          {
+            "subject_id": "R874680",
+            "predicate_label": "research level",
+            "predicate_id": "P162008",
+            "object": {
+              "id": "L1533111",
+              "label": "Primary Research",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874681",
+      "label": "First Research Object 1",
+      "compact": {
+        "problems": [],
+        "methods": [
+          "Architecture Optimization Method"
+        ],
+        "data": [],
+        "evaluation": [
+          "Case Study",
+          "Effectiveness",
+          "Efficiency",
+          "Quality in Use"
+        ],
+        "artifacts": []
+      },
+      "buckets": {
+        "evaluation": [
+          {
+            "subject_id": "R874681",
+            "predicate_label": "Has Evaluation Guideline",
+            "predicate_id": "P168003",
+            "object": {
+              "id": "L1533112",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874681",
+            "predicate_label": "Evaluation method",
+            "predicate_id": "P59089",
+            "object": {
+              "id": "L1533113",
+              "label": "Case Study",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874681",
+            "predicate_label": "Evaluation Sub-Property",
+            "predicate_id": "P168002",
+            "object": {
+              "id": "L1533115",
+              "label": "Effectiveness",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874681",
+            "predicate_label": "Evaluation Sub-Property",
+            "predicate_id": "P168002",
+            "object": {
+              "id": "L1533116",
+              "label": "Efficiency",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874681",
+            "predicate_label": "Evaluation Property",
+            "predicate_id": "P168001",
+            "object": {
+              "id": "L1533117",
+              "label": "Quality in Use",
+              "class": "literal"
+            }
+          }
+        ],
+        "method": [
+          {
+            "subject_id": "R874681",
+            "predicate_label": "Research Object",
+            "predicate_id": "P123038",
+            "object": {
+              "id": "L1533114",
+              "label": "Architecture Optimization Method",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874682",
+      "label": "Validity 1",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": []
+      },
+      "buckets": {
+        "evaluation": [
+          {
+            "subject_id": "R874682",
+            "predicate_label": "threat to validity",
+            "predicate_id": "P39099",
+            "object": {
+              "id": "L1533118",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874682",
+            "predicate_label": "Referenced Threats to Validity Guideline",
+            "predicate_id": "P162071",
+            "object": {
+              "id": "L1533119",
+              "label": "False",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "R874683",
+      "label": "Evidence 1",
+      "compact": {
+        "problems": [],
+        "methods": [],
+        "data": [],
+        "evaluation": [],
+        "artifacts": [
+          "Input data was used but is not available",
+          "Tool is available"
+        ]
+      },
+      "buckets": {
+        "artifact": [
+          {
+            "subject_id": "R874683",
+            "predicate_label": "Provides Replication Package",
+            "predicate_id": "P162020",
+            "object": {
+              "id": "L1533120",
+              "label": "False",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874683",
+            "predicate_label": "Uses Input Data",
+            "predicate_id": "P169004",
+            "object": {
+              "id": "L1533121",
+              "label": "Input data was used but is not available",
+              "class": "literal"
+            }
+          },
+          {
+            "subject_id": "R874683",
+            "predicate_label": "Uses Tool Support",
+            "predicate_id": "P168009",
+            "object": {
+              "id": "L1533122",
+              "label": "Tool is available",
+              "class": "literal"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
